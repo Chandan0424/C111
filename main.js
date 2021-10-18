@@ -22,9 +22,9 @@ model=ml5.imageClassifier("https://teachablemachine.withgoogle.com/models/-nKKJ9
 function modelLoaded(){
     console.log("Model is Loaded!");
 }
-function speak(){
+function Speak(){
     synth=window.SpeechSynthesis;
-    speakData1="The First Prediction is "+prediction_1;
+    speakData1="The Prediction is "+prediction_1;
     utterThis=new SpeechSynthesisUtterance(speakData1);
     synth.speak(utterThis);
 }
@@ -32,9 +32,10 @@ function speak(){
 function output(){
     image=document.getElementById("caputredImage");
     model.classify(image,gotResult);
+    Speak();
 }
 
-prediction_1=results[0].label;
+
 
 function gotResult(error,results){
     if(error){
@@ -43,9 +44,25 @@ function gotResult(error,results){
     else{
         console.log(results);
         prediction_1=results[0].label;
-        document.getElementById("result").innerText=prediction_1;
+        document.getElementById("result").innerHTML=prediction_1;
 
-        speak();
+        if(prediction_1=="Win"){
+            document.getElementById("update_emoji").innerHTML="✌";
+        }
+        else if(prediction_1=="Good"){
+            document.getElementById("update_emoji").innerHTML="👍";
+        }
+        else if(prediction_1=="Bad"){
+            document.getElementById("update_emoji").innerHTML="👎";
+        }
+        else if(prediction_1=="Hi"){
+            document.getElementById("update_emoji").innerHTML="✋";
+        }
+        else if(prediction_1=="Punch"){
+            document.getElementById("update_emoji").innerHTML="👊";
+        }
+
+
     }
 }
 
