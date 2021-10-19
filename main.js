@@ -23,7 +23,7 @@ function modelLoaded(){
     console.log("Model is Loaded!");
 }
 function Speak(){
-    synth=window.SpeechSynthesis;
+    synth=window.speechSynthesis;
     speakData1="The Prediction is "+prediction_1;
     utterThis=new SpeechSynthesisUtterance(speakData1);
     synth.speak(utterThis);
